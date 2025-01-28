@@ -24,6 +24,9 @@
         <td>{{ order.table_number }}</td>
         <td>{{ order.get_status_display }}</td>
         <td>{{ order.total_price }}</td>
+        <td>
+            <a href="{% url 'order_delete' id=order.id %}">Удалить заказ</a>
+        </td>
     </tr>
     {% endfor %}
 </table>

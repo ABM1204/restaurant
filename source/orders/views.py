@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import Order, OrderItem
 
 
@@ -32,3 +32,12 @@ def order_create(request):
 def order_list(request):
     orders = Order.objects.all()
     return render(request, 'order_list.html', {'orders': orders})
+
+def order_delete(request, id):
+    order = get_object_or_404(Order, id=id)
+    order.delete()
+    return redirect('order_list')
+
+
+
+
