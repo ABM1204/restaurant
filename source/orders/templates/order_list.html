@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Список заказов</h1>
+<a href="{% url 'order_create' %}">Добавить заказ</a>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Стол</th>
+        <th>Статус</th>
+        <th>Общая стоимость</th>
+        <th>Действия</th>
+    </tr>
+    {% for order in orders %}
+    <tr>
+        <td>{{ order.id }}</td>
+        <td>{{ order.table_number }}</td>
+        <td>{{ order.get_status_display }}</td>
+        <td>{{ order.total_price }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+</body>
+</html>

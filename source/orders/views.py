@@ -27,3 +27,8 @@ def order_create(request):
             return render(request, 'order_create.html', {'error': f'Ошибка: {e}'})
 
     return render(request, 'order_create.html')
+
+
+def order_list(request):
+    orders = Order.objects.all()
+    return render(request, 'order_list.html', {'orders': orders})

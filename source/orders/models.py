@@ -9,7 +9,6 @@ class Order(models.Model):
         ('оплачено', 'Оплачено'),
     ]
 
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     table_number = models.IntegerField()
     status = models.CharField(choices=STATUS, max_length=20, default='в ожидании')
     total_price = models.DecimalField(decimal_places=2, max_digits=10)
@@ -21,7 +20,6 @@ class Order(models.Model):
         return total
 
 class OrderItem(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     order = models.ForeignKey(Order, on_delete=models.CASCADE)
     name = models.CharField(max_length=100)
     price = models.DecimalField(decimal_places=2, max_digits=10)
