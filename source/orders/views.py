@@ -52,6 +52,9 @@ def order_create(request):
 
 def order_list(request):
     orders = Order.objects.all()
+    query = request.GET.get('q')
+    if query:
+        orders = orders.filter(table_number__icontains=query) | orders.filter(status__icontains=query)
     return render(request, 'order_list.html', {'orders': orders})
 
 def order_delete(request, id):

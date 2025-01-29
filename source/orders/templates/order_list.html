@@ -8,26 +8,36 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Список заказов</h1>
+<h1>Список заказов</h1>
 <a href="{% url 'order_create' %}">Добавить заказ</a>
+<form method="get">
+    <input type="text" name="q" placeholder="введите ID или статус">
+    <button type="submit">Искать</button>
+</form>
 <table>
     <tr>
         <th>ID</th>
         <th>Стол</th>
-        <th>Статус</th>
+        <th>Список блюд</th>
         <th>Общая стоимость</th>
+        <th>Статус</th>
         <th>Действия</th>
     </tr>
     {% for order in orders %}
-    <tr>
-        <td>{{ order.id }}</td>
-        <td>{{ order.table_number }}</td>
-        <td>{{ order.get_status_display }}</td>
-        <td>{{ order.total_price }}</td>
-        <td>
-            <a href="{% url 'order_delete' id=order.id %}">Удалить заказ</a>
-        </td>
-    </tr>
+        <tr>
+            <td>{{ order.id }}</td>
+            <td>{{ order.table_number }}</td>
+            <td>
+                {% for item in order.orderitem_set.all %}
+                    {{ item.name }} ({{ item.quantity }} x {{ item.price }}),
+                {% endfor %}
+            </td>
+            <td>{{ order.get_status_display }}</td>
+            <td>{{ order.total_price }}</td>
+            <td>
+                <a href="{% url 'order_delete' id=order.id %}">Удалить заказ</a>
+            </td>
+        </tr>
     {% endfor %}
 </table>
 
