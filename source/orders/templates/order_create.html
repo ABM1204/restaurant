@@ -11,7 +11,7 @@
 </head>
 <body>
 <h1>Создать заказ</h1>
-<form method="post">
+<form method="POST" action="{% url 'order_create' %}">
     {% csrf_token %}
     <label>Номер стола:</label>
     <input type="number" name="table_number">

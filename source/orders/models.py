@@ -1,5 +1,4 @@
 import uuid
-
 from django.db import models
 
 class Order(models.Model):
@@ -11,7 +10,7 @@ class Order(models.Model):
 
     table_number = models.IntegerField()
     status = models.CharField(choices=STATUS, max_length=20, default='в ожидании')
-    total_price = models.DecimalField(decimal_places=2, max_digits=10)
+    total_price = models.DecimalField(decimal_places=2, max_digits=10, default=0)
 
     def get_total_price(self):
         total = sum(item.price * item.quantity for item in self.orderitem_set.all())
