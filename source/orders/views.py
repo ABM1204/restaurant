@@ -3,7 +3,7 @@ import logging
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import View, DeleteView, UpdateView, TemplateView
-
+from django.db.models import Q
 from .forms import OrderForm
 from .models import Order, OrderItem
 
@@ -84,7 +84,11 @@ def order_list(request):
     orders = Order.objects.all()
     query = request.GET.get('q')
     if query:
-        orders = orders.filter(table_number__icontains=query) | orders.filter(status__icontains=query)
+        query_lower = query.lower()
+        orders = orders.filter(
+            Q(table_number__exact=query) |
+            Q(status__iexact=query_lower)
+        )
     return render(request, 'order_list.html', {'orders': orders})
 
 
