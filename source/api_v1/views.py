@@ -3,7 +3,7 @@ from rest_framework.generics import get_object_or_404
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from orders.models import Order, OrderItem
-from orders.serializers import OrderSerializer
+from api_v1.serializers import OrderSerializer
 
 
 class OrderList(generics.ListAPIView):

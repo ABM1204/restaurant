@@ -21,6 +21,7 @@ from django.views.generic import RedirectView
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('order/', include('orders.urls')),
+    path('api/', include('api_v1.urls')),
     path('', RedirectView.as_view(url='/order/order_list/', permanent=False)),
 ]
 

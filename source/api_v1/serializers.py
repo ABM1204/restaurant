@@ -1,5 +1,6 @@
 from rest_framework import serializers
-from .models import Order, OrderItem
+
+from orders.models import Order, OrderItem
 
 
 class OrderItemSerializer(serializers.ModelSerializer):
@@ -24,6 +25,7 @@ class OrderSerializer(serializers.ModelSerializer):
 
         order.update_total_price()
         return order
+
 
 class OrderStatusUpdateSerializer(serializers.ModelSerializer):
     class Meta:

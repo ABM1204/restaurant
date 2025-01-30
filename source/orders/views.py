@@ -3,9 +3,10 @@ from django.urls import reverse_lazy
 from django.views.generic import View, DeleteView, UpdateView, TemplateView
 from .models import Order, OrderItem
 
-
 import sys
+
 sys.stdout.reconfigure(encoding='utf-8')
+
 
 class OrderCreateView(View):
     def get(self, request):
@@ -54,7 +55,6 @@ def order_list(request):
     return render(request, 'order_list.html', {'orders': orders})
 
 
-
 class OrderDeleteView(DeleteView):
     model = Order
     template_name = 'order_delete.html'
@@ -73,8 +73,10 @@ class OrderUpdateView(UpdateView):
 
     def get_object(self, queryset=None):
         return Order.objects.get(id=self.kwargs['id'])
+
     def get_success_url(self):
         return reverse_lazy('order_list')
+
 
 class RevenueView(TemplateView):
     template_name = 'revenue.html'

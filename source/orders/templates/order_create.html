@@ -1,5 +1,4 @@
 {% load static %}
-
 <!doctype html>
 <html lang="en">
 <head>
@@ -7,28 +6,32 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Order create</title>
+    <link rel="stylesheet" href="{% static 'css/order_create.css' %}">
 </head>
 <body>
-<h1>Создать заказ</h1>
-<form method="POST" action="{% url 'order_create' %}">
-    {% csrf_token %}
-    <label>Номер стола:</label>
-    <input type="number" name="table_number" required>
-    
-    <div id="items">
-        <div class="item">
-            <label>Блюдо:</label>
-            <input type="text" name="items[]" required>
-            <label>Цена:</label>
-            <input type="number" name="prices[]" step="0.01" required>
-            <label>Количество:</label>
-            <input type="number" name="quantities[]" required>
+<div class="container">
+    <h1>Создать заказ</h1>
+    <form method="POST" action="{% url 'order_create' %}">
+        {% csrf_token %}
+        <label for="table_number">Номер стола:</label>
+        <input type="number" name="table_number" required>
+        
+        <div id="items">
+            <div class="item">
+                <label for="item">Блюдо:</label>
+                <input type="text" name="items[]" required>
+                <label for="price">Цена:</label>
+                <input type="number" name="prices[]" step="0.01" required>
+                <label for="quantity">Количество:</label>
+                <input type="number" name="quantities[]" required>
+            </div>
         </div>
-    </div>
-    <button type="button" onclick="addItem()">Добавить блюдо</button>
-    <button type="submit">Создать</button>
-</form>
+        
+        <button type="button" class="add_food_btn" onclick="addItem()">Добавить блюдо</button>
+        <button type="submit">Создать</button>
+    </form>
+</div>
 
 <script src="{% static 'js/order_create.js' %}"></script>
 
