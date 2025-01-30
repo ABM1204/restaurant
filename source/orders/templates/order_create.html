@@ -14,14 +14,17 @@
 <form method="POST" action="{% url 'order_create' %}">
     {% csrf_token %}
     <label>Номер стола:</label>
-    <input type="number" name="table_number">
+    <input type="number" name="table_number" required>
+    
     <div id="items">
-        <label>Блюдо:</label>
-        <input type="text" name="items[]">
-        <label>Цена:</label>
-        <input type="number" name="prices[]" step="0.01">
-        <label>Количество:</label>
-        <input type="number" name="quantities[]">
+        <div class="item">
+            <label>Блюдо:</label>
+            <input type="text" name="items[]" required>
+            <label>Цена:</label>
+            <input type="number" name="prices[]" step="0.01" required>
+            <label>Количество:</label>
+            <input type="number" name="quantities[]" required>
+        </div>
     </div>
     <button type="button" onclick="addItem()">Добавить блюдо</button>
     <button type="submit">Создать</button>

@@ -29,19 +29,18 @@
             <td>{{ order.id }}</td>
             <td>{{ order.table_number }}</td>
             <td>
-                {% for item in order.orderitem_set.all %}
+                {% for item in order.order_items.all %}
                     {{ item.name }} ({{ item.quantity }} x {{ item.price }}),
                 {% endfor %}
             </td>
-            <td>{{ order.get_status_display }}</td>
             <td>{{ order.total_price }}</td>
+            <td>{{ order.get_status_display }}</td>
             <td>
-                <a href="{% url 'order_delete' id=order.id %}">Удалить заказ</a>
-                <a href="{% url 'order_update' id=order.id %}">Изменить статус</a>
+                <a href="{% url 'order_delete' order.id %}">Удалить заказ</a>
+                <a href="{% url 'order_update' order.id %}">Изменить статус</a>
             </td>
         </tr>
     {% endfor %}
 </table>
-
 </body>
 </html>

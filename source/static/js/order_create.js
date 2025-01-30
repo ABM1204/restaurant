@@ -1,14 +1,19 @@
 function addItem() {
-    const itemsDiv = document.getElementById('items');
-    const itemDiv = document.createElement('div');
+    var itemDiv = document.createElement("div");
+    itemDiv.classList.add("item");
     itemDiv.innerHTML = `
         <label>Блюдо:</label>
-        <input type="text" name="items[]">
+        <input type="text" name="items[]" required>
         <label>Цена:</label>
-        <input type="number" name="prices[]" step="0.01">
+        <input type="number" name="prices[]" step="0.01" required>
         <label>Количество:</label>
-        <input type="number" name="quantities[]">
+        <input type="number" name="quantities[]" required>
+        <button type="button" onclick="removeItem(this)">Удалить блюдо</button>
     `;
-    itemsDiv.appendChild(itemDiv);
+
+    document.getElementById("items").appendChild(itemDiv);
 }
 
+function removeItem(button) {
+    button.parentElement.remove();
+}
