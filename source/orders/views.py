@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.views.generic import View
+from django.urls import reverse_lazy
+from django.views.generic import View, DeleteView
 from .models import Order, OrderItem
 
 
@@ -54,10 +55,15 @@ def order_list(request):
 
 
 
-def order_delete(request, id):
-    order = get_object_or_404(Order, id=id)
-    order.delete()
-    return redirect('order_list')
+class OrderDeleteView(DeleteView):
+    model = Order
+    template_name = 'order_delete.html'
+    context_object_name = 'order'
+    success_url = reverse_lazy('order_list')
+
+    def get_object(self, queryset=None):
+        return Order.objects.get(id=self.kwargs['id'])
+
 
 def order_update(request, id):
     order = get_object_or_404(Order, id=id)

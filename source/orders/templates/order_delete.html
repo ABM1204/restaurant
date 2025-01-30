@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<h1>Удалить заказ №{{ order.id }}?</h1>
+<p>Вы уверены, что хотите удалить заказ для стола №{{ order.table_number }}? Это действие нельзя отменить.</p>
+
+<div>
+    <h3>Список блюд в заказе:</h3>
+    <ul>
+        {% for item in order.order_items.all %}
+            {{ item.name }} ({{ item.quantity }} x {{ item.price }}),
+        {% endfor %}
+    </ul>
+</div>
+
+<form method="post">
+    {% csrf_token %}
+    <button type="submit">Удалить</button>
+    <a href="{% url 'order_list' %}">Отмена</a>
+</form>
+
+</body>
+</html>

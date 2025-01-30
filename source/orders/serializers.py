@@ -6,15 +6,15 @@ from .models import Order, OrderItem
 class OrderItemSerializer(serializers.ModelSerializer):
     class Meta:
         model = OrderItem
-        fields = ['name', 'price', 'quantity']
+        fields = ['id', 'name', 'price', 'quantity']
 
 
 class OrderSerializer(serializers.ModelSerializer):
-    items = OrderItemSerializer(many=True)
+    items = OrderItemSerializer(many=True, read_only=True, source='order_items')
 
     class Meta:
         model = Order
-        fields = ['table_number', 'status', 'items']
+        fields = ['id', 'table_number', 'items', 'total_price', 'status']
 
     def create(self, validated_data):
         items_data = validated_data.pop('items')
