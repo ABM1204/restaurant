@@ -18,7 +18,9 @@
         {% csrf_token %}
         <label for="table_number">Номер стола:</label>
         <input type="number" name="table_number" required>
-
+        <input type="hidden" name="items" id="hidden_items">
+        <input type="hidden" name="prices" id="hidden_prices">
+        <input type="hidden" name="quantities" id="hidden_quantities">
         <div id="items">
             <div class="item">
                 <label for="item">Блюдо:</label>
@@ -30,7 +32,9 @@
             </div>
         </div>
 
+        <!-- Кнопка для добавления блюд -->
         <button type="button" class="add_food_btn" onclick="addItem()">Добавить блюдо</button>
+
         <div class="button-container">
             <button type="submit" class="btn btn-primary">Создать</button>
             <a href="{% url 'order_list' %}" class="btn btn-primary">На главную</a>
@@ -43,5 +47,8 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-pzjw8f+ua7Kw1TIq0RIqz7rMzL27HW4eVoGz6zZzpYWEr5EwR2FwmH8P3Xm1IN75"
         crossorigin="anonymous"></script>
+
+<script src="{% static 'js/order_create.js' %}"></script>
+
 </body>
 </html>
