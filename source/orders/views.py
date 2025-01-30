@@ -80,15 +80,19 @@ class OrderCreateView(View):
         return order_items
 
 
+from django.db.models import Q
+
+
 def order_list(request):
     orders = Order.objects.all()
     query = request.GET.get('q')
     if query:
-        query_lower = query.lower()
-        orders = orders.filter(
-            Q(table_number__exact=query) |
-            Q(status__iexact=query_lower)
-        )
+        if query.isdigit():
+            orders = orders.filter(table_number=query)
+        else:
+            query_lower = query.lower()
+            orders = orders.filter(status__iexact=query_lower)
+
     return render(request, 'order_list.html', {'orders': orders})
 
 
