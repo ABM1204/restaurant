@@ -1,5 +1,5 @@
-import uuid
 from django.db import models
+
 
 class Order(models.Model):
     STATUS = [
@@ -18,6 +18,10 @@ class Order(models.Model):
         self.save()
         return total
 
+    @classmethod
+    def calculate_revenue(cls):
+        return cls.objects.filter(status='оплачено').aggregate(total=models.Sum('total_price'))['total'] or 0
+
 class OrderItem(models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE)
     name = models.CharField(max_length=100)
@@ -26,3 +30,4 @@ class OrderItem(models.Model):
 
     def get_total_price(self):
         return self.price * self.quantity
+

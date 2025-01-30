@@ -10,6 +10,7 @@
 <body>
 <h1>Список заказов</h1>
 <a href="{% url 'order_create' %}">Добавить заказ</a>
+<a href="{% url 'revenue' %}">Выручка</a>
 <form method="get">
     <input type="text" name="q" placeholder="введите ID или статус">
     <button type="submit">Искать</button>
@@ -36,6 +37,7 @@
             <td>{{ order.total_price }}</td>
             <td>
                 <a href="{% url 'order_delete' id=order.id %}">Удалить заказ</a>
+                <a href="{% url 'order_update' id=order.id %}">Изменить статус</a>
             </td>
         </tr>
     {% endfor %}

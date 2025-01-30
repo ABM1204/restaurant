@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <form id="statusForm" method="POST" action="{% url 'order_update' order.id %}">
+    {% csrf_token %}
+    <select name="status">
+        <option value="в ожидании" {% if order.status == "в ожидании" %}selected{% endif %}>В ожидании</option>
+        <option value="готово" {% if order.status == "готово" %}selected{% endif %}>Готово</option>
+        <option value="оплачено" {% if order.status == "оплачено" %}selected{% endif %}>Оплачено</option>
+    </select>
+    <button type="submit">Изменить статус</button>
+</form>
+
+</body>
+</html>

@@ -61,3 +61,30 @@ def order_delete(request, id):
     order = get_object_or_404(Order, id=id)
     order.delete()
     return redirect('order_list')
+
+from django.shortcuts import get_object_or_404, render
+from django.http import HttpResponse
+from .models import Order
+
+def order_update(request, id):
+    order = get_object_or_404(Order, id=id)
+
+    if request.method == "POST":
+        status = request.POST.get('status')
+
+        statuses = [choice[0] for choice in Order.STATUS]
+        if status not in statuses:
+            return HttpResponse("Некорректный статус", status=400)
+
+        order.status = status
+        order.save()
+
+        return redirect('order_list')
+
+    return render(request, 'order_update.html', {'order': order})
+
+
+def revenue_view(request):
+    revenue = Order.calculate_revenue()
+    return render(request, 'revenue.html', {'revenue': revenue})
+
