@@ -5,30 +5,63 @@ body {
     padding: 0;
 }
 
+h2 {
+    text-align: center;
+    margin: 20px 0;
+    color: #333;
+}
+
 .container {
-    width: 50%;
+    width: 80%;
     margin: 0 auto;
     background-color: white;
     padding: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
-    margin-top: 50px;
-    text-align: center;
 }
 
-h2 {
-    color: #333;
-    font-size: 24px;
-    margin-bottom: 20px;
-}
-
-p {
-    font-size: 20px;
-    color: #555;
+table {
+    width: 100%;
+    border-collapse: collapse;
     margin-top: 20px;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+th {
+    background-color: #f1f1f1;
+    color: #333;
     font-weight: bold;
 }
 
-p span {
-    color: #27ae60;
+td {
+    background-color: #fff;
+    color: #333;
 }
+
+tr:nth-child(even) td {
+    background-color: #f9f9f9;
+}
+
+.revenue_text {
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-align: center;
+    color: #333;
+}
+
+span {
+    color: #28a745;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+td p {
+    margin: 0;
+    font-size: 1rem;
+}
+

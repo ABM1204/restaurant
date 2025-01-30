@@ -1,0 +1,14 @@
+{% if form.errors %}
+    <div class="alert" id="error-alert">
+        <strong>Ошибка!</strong> Пожалуйста, исправьте ошибки в форме.
+    </div>
+    <script type="text/javascript">
+        window.onload = function() {
+            var alertBox = document.getElementById("error-alert");
+            alertBox.style.display = "block"; 
+            setTimeout(function() {
+                alertBox.style.display = "none"; 
+            }, 5000);
+        };
+    </script>
+{% endif %}
