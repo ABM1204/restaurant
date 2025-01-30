@@ -1,5 +1,7 @@
-from rest_framework import generics, permissions
+from rest_framework import generics, permissions, status
 from rest_framework.generics import get_object_or_404
+from rest_framework.views import APIView
+from rest_framework.response import Response
 from orders.models import Order, OrderItem
 from orders.serializers import OrderSerializer
 
@@ -39,3 +41,10 @@ class OrderUpdateApiView(generics.UpdateAPIView):
 
     def get_object(self):
         return get_object_or_404(Order, id=self.kwargs['id'])
+
+
+class RevenueApiView(APIView):
+    def get(self, request, *args, **kwargs):
+        revenue = Order.calculate_revenue()
+        return Response({"revenue": revenue}, status=status.HTTP_200_OK)
+
